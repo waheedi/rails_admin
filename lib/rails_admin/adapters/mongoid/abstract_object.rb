@@ -15,7 +15,7 @@ module RailsAdmin
                 end
 
                 def #{name.to_s.singularize}_ids=(item_ids)
-                  logger.info "we are inside lets prints item_id #{items_id}"
+                  logger.info "we are inside lets prints item_id #{item_ids}"
                   __items__ = Array.wrap(item_ids).map{|item_id| #{name}.klass.find(item_id) rescue nil }.compact
                   unless persisted?
                     __items__.each do |item|
