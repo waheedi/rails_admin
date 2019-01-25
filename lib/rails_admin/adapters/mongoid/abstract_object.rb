@@ -15,12 +15,17 @@ module RailsAdmin
                 end
 
                 def #{name.to_s.singularize}_ids=(item_ids)
+                  logger.info "we are inside lets prints item_id #{items_id}"
                   __items__ = Array.wrap(item_ids).map{|item_id| #{name}.klass.find(item_id) rescue nil }.compact
                   unless persisted?
                     __items__.each do |item|
+                      logger.info "+++++++ we are in persisted ##{association.foreign_key}"
                       item.update_attribute('#{association.foreign_key}', id)
                     end
                   end
+
+                  logger.info  "++++++++++++++++ #{__items__.map(&:id)}"
+
                   super __items__.map(&:id)
                 end
 RUBY
