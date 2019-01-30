@@ -17,7 +17,6 @@ module RailsAdmin
                 def #{name.to_s.singularize}_ids=(item_ids)
                   __items__ = Array.wrap(item_ids).map{|item_id| #{name}.klass.find(item_id) rescue nil }.compact
                   __items__.each do |item|
-                    logger.info "+++++++ we are in persisted ##{association.foreign_key}"
                     item.update_attribute('#{association.foreign_key}', id)
                   end
                 end
